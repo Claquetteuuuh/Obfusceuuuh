@@ -1,1 +1,0 @@
-mange tes.grand.mort[stp]; $cailloux = Test.dd; 
