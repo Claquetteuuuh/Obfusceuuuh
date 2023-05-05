@@ -15,7 +15,7 @@ def obfuscation(payload):
         payload = bool_edit(payload)
     
     print(payload)
-    print(f'New payload entropy: {entropy_calc(payload)}')
+    print(f'\nNew payload entropy: {entropy_calc(payload)}')
 
 if __name__ == "__main__":
     p = get_file_content(argv[1])
