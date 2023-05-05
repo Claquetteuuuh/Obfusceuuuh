@@ -38,22 +38,25 @@ if __name__ == "__main__":
         help="Enter the mode"
     )
     args = parser.parse_args()
-    p = get_file_content(args.file_name)
-    if args.mode == None:
-        obfuscation(p)
+    if args.file_name == None:
+        print("File not specified. Use -f <FILE_NAME>")
+    else:
+        p = get_file_content(args.file_name)
+        if args.mode == None:
+            obfuscation(p)
 
-    elif re.match("[vV][aA][rR]", args.mode):
-        payload = rename(p)
-        print(payload)
+        elif re.match("[vV][aA][rR]", args.mode):
+            payload = rename(p)
+            print(payload)
 
-    elif re.match("[bB][oO][oO][lL][eE][aA][nN]", args.mode):
-        if '$True' in p or '$true' in p or '$False' in p or '$false' in p:
-            payload = bool_edit(p)
-        print(payload)
+        elif re.match("[bB][oO][oO][lL][eE][aA][nN]", args.mode):
+            if '$True' in p or '$true' in p or '$False' in p or '$false' in p:
+                payload = bool_edit(p)
+            print(payload)
 
-    elif re.match("[qQ][uU][oO][tT][eE]", args.mode):
-        payload = quote_interrupt(p)
-        print(payload)
+        elif re.match("[qQ][uU][oO][tT][eE]", args.mode):
+            payload = quote_interrupt(p)
+            print(payload)
 
-    elif re.match("[eE][nN][tT][rR][oO][pP][yY]", args.mode):
-        print(entropy_calc(p))
+        elif re.match("[eE][nN][tT][rR][oO][pP][yY]", args.mode):
+            print(entropy_calc(p))
