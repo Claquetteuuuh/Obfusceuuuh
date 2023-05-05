@@ -77,5 +77,5 @@ def replace(bool_v, used_v_names, payload, char):
                 used_v_names.append(new_bool_name)
                 break	
 						
-        return payload.replace(boolean, f'{char}{new_bool_name}')
+        return payload.replace(boolean, f'{char}({new_bool_name})')
     
