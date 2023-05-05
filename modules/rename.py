@@ -1,8 +1,4 @@
 #!/bin/python3
-#
-# This script is an example. It is not perfect and you should use it with caution.
-# Source: https://github.com/t3l3machus/PowerShell-Obfuscation-Bible
-# Usage: python3 randomize-variables.py <path/to/powershell/script>
 
 import re
 from sys import argv

@@ -1,7 +1,7 @@
 from sys import argv
 from modules.rename import rename as rename
 from modules.boolean import bool_edit as bool_edit
-import re
+from modules.entropy_calc import entropy as entropy_calc
 
 def get_file_content(path):
 	f = open(path, 'r')
@@ -15,6 +15,7 @@ def obfuscation(payload):
         payload = bool_edit(payload)
     
     print(payload)
+    print(f'New payload entropy: {entropy_calc(payload)}')
 
 if __name__ == "__main__":
     p = get_file_content(argv[1])
