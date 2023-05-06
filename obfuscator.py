@@ -7,6 +7,8 @@ from modules.boolean import bool_edit as bool_edit
 from modules.entropy_calc import entropy as entropy_calc
 from modules.quote_inter import interrupt as quote_interrupt
 from modules.gcm import gcm as gcm
+from modules.encode_string import encode as encode_string
+from modules.commentropy import commentropy
 
 def get_file_content(path: str):
     f = open(path, 'r')
@@ -18,15 +20,18 @@ def get_file_content(path: str):
 def obfuscation(payload: str):
     if '$True' in payload or '$true' in payload or '$False' in payload or '$false' in payload:
         payload = bool_edit(payload)
-    payload = random.choice([quote_interrupt(payload), gcm(payload)])
     payload = rename(payload)
+    payload = random.choice([quote_interrupt(payload), gcm(payload)])
+    payload = commentropy(payload)
+    payload = encode_string(payload)
+
     print(payload)
     print(f'\nNew payload entropy: {entropy_calc(payload)}')
 
 
 if __name__ == "__main__":
     
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="A command line tool that you can use to make your payload undetectable to anti-virus software. \nhttps://github.com/Claquetteuuuh/auto_powershell_obfuscation")
     parser.add_argument(
         "-f",
         "--file_name",
@@ -62,6 +67,12 @@ if __name__ == "__main__":
 
         elif re.match("[gG][cC][mM]", args.mode):
             print(gcm(p))
+
+        elif re.match("[sS][tT][rR]64", args.mode):
+            print(encode_string(p))
+
+        elif re.match("[cC][oO][mM][mM][eE][nN][tT]", args.mode):
+            print(commentropy(p))
 
         elif re.match("[eE][nN][tT][rR][oO][pP][yY]", args.mode):
             print(entropy_calc(p))
