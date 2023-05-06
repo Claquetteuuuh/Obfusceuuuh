@@ -37,7 +37,7 @@ if __name__ == "__main__":
         "-m",
         "--mode",
         type=str,
-        help="Enter the mode"
+        help="Enter the mode, Default=ALL"
     )
     args = parser.parse_args()
     if args.file_name == None:
