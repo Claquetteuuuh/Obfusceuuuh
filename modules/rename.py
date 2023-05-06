@@ -4,7 +4,7 @@ import re
 from sys import argv
 from uuid import uuid4
 
-def rename(p):
+def rename(p: str):
 
 	payload = p
 	used_var_names = []

@@ -2,7 +2,7 @@
 
 import math
 
-def entropy(string):
+def entropy(string: str):
 
 
     # get probability of chars in string

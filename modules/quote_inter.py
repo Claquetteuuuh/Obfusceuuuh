@@ -1,7 +1,7 @@
 import random
 import re
 
-def gen_quotes(n):
+def gen_quotes(n: int):
     quotes = ['"', "'"]
     string_tab = []
     for i in range(n):
@@ -11,7 +11,7 @@ def gen_quotes(n):
 
     return "".join(string_tab)
 
-def interrupt(payload):
+def interrupt(payload: str):
     """
         Une fonction vraiment dégueulasse fait a la zeub a minuit si vous avez mieux pour mettre des quotes seulement entre les Cmdlet je suis preneur
     """

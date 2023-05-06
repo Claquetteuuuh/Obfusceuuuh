@@ -1,22 +1,24 @@
 import argparse
 import re
+import random
 
 from modules.rename import rename as rename
 from modules.boolean import bool_edit as bool_edit
 from modules.entropy_calc import entropy as entropy_calc
 from modules.quote_inter import interrupt as quote_interrupt
+from modules.gcm import gcm as gcm
 
-def get_file_content(path):
+def get_file_content(path: str):
     f = open(path, 'r')
     content = f.read()
     f.close()
     return content
 
 
-def obfuscation(payload):
+def obfuscation(payload: str):
     if '$True' in payload or '$true' in payload or '$False' in payload or '$false' in payload:
         payload = bool_edit(payload)
-    payload = quote_interrupt(payload)
+    payload = random.choice([quote_interrupt(payload), gcm(payload)])
     payload = rename(payload)
     print(payload)
     print(f'\nNew payload entropy: {entropy_calc(payload)}')
@@ -24,7 +26,7 @@ def obfuscation(payload):
 
 if __name__ == "__main__":
     
-    parser = argparse.ArgumentParser(description="print hello")
+    parser = argparse.ArgumentParser()
     parser.add_argument(
         "-f",
         "--file_name",
@@ -57,6 +59,9 @@ if __name__ == "__main__":
         elif re.match("[qQ][uU][oO][tT][eE]", args.mode):
             payload = quote_interrupt(p)
             print(payload)
+
+        elif re.match("[gG][cC][mM]", args.mode):
+            print(gcm(p))
 
         elif re.match("[eE][nN][tT][rR][oO][pP][yY]", args.mode):
             print(entropy_calc(p))

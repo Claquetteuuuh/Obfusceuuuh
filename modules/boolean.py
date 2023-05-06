@@ -5,7 +5,7 @@ from sys import argv
 from uuid import uuid4
 import random
 
-def bool_edit(p):
+def bool_edit(p: str):
 
     bool_val = [
 	    "[bool]1254",
@@ -50,7 +50,7 @@ def bool_edit(p):
 	
     return payload
 
-def replace(bool_v, used_v_names, payload, char):
+def replace(bool_v: list, used_v_names: list, payload: str, char: str):
     # Identify variables definitions in script
     if char == "":
         boolean_definition = re.findall('\$[tT]rue', payload)
