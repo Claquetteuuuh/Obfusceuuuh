@@ -44,9 +44,9 @@ def interrupt(payload: str):
                             crochet += 1
                         elif payload_list[i] == "]":
                             crochet -= 1            
-                        elif re.match("[0-9 ;'\"`=,]", payload_list[i] ) or payload_list[i] in separator:
+                        elif  payload_list[i] in separator:
                             stop = False
-                        elif crochet == 0 and stop == False and stop_quote == False and random.choice([True, False]) and i != 0 and re.match("[a-zA-Z]", payload_list[i-1]) and re.match("[a-zA-Z]", payload_list[i]) and re.match("[a-zA-Z]", payload_list[i+1]):
+                        elif crochet == 0 and stop == False and stop_quote == False and i != 0 and re.match("[a-zA-Z]", payload_list[i-1]) and re.match("[a-zA-Z]", payload_list[i]) and re.match("[a-zA-Z]", payload_list[i+1]):
                             payload_list.insert(i, gen_quotes(1))
                             i += 1
                         i +=1
