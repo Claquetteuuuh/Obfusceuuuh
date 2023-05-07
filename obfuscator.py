@@ -7,7 +7,7 @@ from modules.boolean import bool_edit as bool_edit
 from modules.entropy_calc import entropy as entropy_calc
 from modules.quote_inter import interrupt as quote_interrupt
 from modules.gcm import gcm as gcm
-from modules.encode_string import encode as encode_string
+from modules.encode_string import encode_str as encode_string, encode as base64encode
 from modules.commentropy import commentropy
 from modules.cmd_sub import sub as cmd_sub
 from modules.randomize_case import randomize_case
@@ -17,6 +17,11 @@ def get_file_content(path: str):
     content = f.read()
     f.close()
     return content
+
+def put_in_file(path: str, payload: str):
+    f = open(path, 'w')
+    f.write(payload)
+    f.close()
 
 
 def obfuscation(payload: str):
@@ -30,9 +35,11 @@ def obfuscation(payload: str):
     payload = commentropy(payload)
     payload = randomize_case(payload)
     payload = encode_string(payload)
+    payload = f"{base64encode(payload)}"
 
     print(payload)
     print(f'\nNew payload entropy: {entropy_calc(payload)}')
+    return payload
 
 
 if __name__ == "__main__":
@@ -51,23 +58,30 @@ if __name__ == "__main__":
         help="Enter the mode, Default=ALL"
     )
     parser.add_argument(
-        "-p"
+        "-p",
         "--payload",
         type=str,
-        help="Enter your payload string"
+        help="Enter your payload string."
+    )
+    parser.add_argument(
+        "-o",
+        "--out_file",
+        type=str,
+        help="Enter the file to write your new payload."
     )
     args = parser.parse_args()
     if args.file_name == None and args.payload == None:
         print("Any payload specified. Use -f <FILE_NAME> or -p <PAYLOAD>")
     else:
         p = ""
+        payload = ""
         if args.file_name != None:
             p = get_file_content(args.file_name)
         else:
             p = args.payload
        
         if args.mode == None:
-            obfuscation(p)
+            payload = obfuscation(p)
         elif re.match("[vV][aA][rR]", args.mode):
             payload = rename(p)
             print(payload)
@@ -82,19 +96,33 @@ if __name__ == "__main__":
             print(payload)
 
         elif re.match("[gG][cC][mM]", args.mode):
-            print(gcm(p))
+            payload = gcm(p)
+            print(payload)
 
         elif re.match("[sS][tT][rR]64", args.mode):
-            print(encode_string(p))
+            payload = encode_string(p)
+            print(payload)
 
         elif re.match("[cC][oO][mM][mM][eE][nN][tT]", args.mode):
-            print(commentropy(p))
+            payload = commentropy(p)
+            print(payload)
 
         elif re.match("[sS][uU][bB]", args.mode):
-            print(cmd_sub(p))
+            payload = cmd_sub(p)
+            print(payload)
 
         elif re.match("[rR][cC][aA][sS][eE]", args.mode):
-            print(randomize_case(p))
+            payload = randomize_case(p)
+            print(payload)
+        
+        elif re.match("[eE][nN][cC][oO][dD][eE]", args.mode):
+            payload = base64encode(p)
+            print(payload)
 
         elif re.match("[eE][nN][tT][rR][oO][pP][yY]", args.mode):
-            print(entropy_calc(p))
+            payload = entropy_calc(p)
+            print(payload)
+
+        if args.out_file != None:
+            put_in_file(args.out_file, payload)
+            print(f"\nYour payload was written in {args.out_file}")
