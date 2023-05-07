@@ -10,6 +10,7 @@ from modules.gcm import gcm as gcm
 from modules.encode_string import encode as encode_string
 from modules.commentropy import commentropy
 from modules.cmd_sub import sub as cmd_sub
+from modules.randomize_case import randomize_case
 
 def get_file_content(path: str):
     f = open(path, 'r')
@@ -25,6 +26,7 @@ def obfuscation(payload: str):
     payload = cmd_sub(payload)
     payload = random.choice([quote_interrupt(payload), gcm(payload)])
     payload = commentropy(payload)
+    payload = randomize_case(payload)
     payload = encode_string(payload)
 
     print(payload)
@@ -78,6 +80,9 @@ if __name__ == "__main__":
 
         elif re.match("[sS][uU][bB]", args.mode):
             print(cmd_sub(p))
+
+        elif re.match("[rR][cC][aA][sS][eE]", args.mode):
+            print(randomize_case(p))
 
         elif re.match("[eE][nN][tT][rR][oO][pP][yY]", args.mode):
             print(entropy_calc(p))
