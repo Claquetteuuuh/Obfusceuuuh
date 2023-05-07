@@ -7,7 +7,7 @@ def put_char(word: str, char: str):
         for i in range(len(parts)):
             for j in range(len(parts[i])):
                 if j%2 == 0 and j != 0 and j != len(parts[i]) -1:
-                    new_word += (char * random.randint(1, 20))
+                    new_word += (char * random.randint(1, 40))
                 else:
                     new_word += parts[i][j]
             if i != len(parts) -1:

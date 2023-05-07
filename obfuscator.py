@@ -9,6 +9,7 @@ from modules.quote_inter import interrupt as quote_interrupt
 from modules.gcm import gcm as gcm
 from modules.encode_string import encode as encode_string
 from modules.commentropy import commentropy
+from modules.cmd_sub import sub as cmd_sub
 
 def get_file_content(path: str):
     f = open(path, 'r')
@@ -21,6 +22,7 @@ def obfuscation(payload: str):
     if '$True' in payload or '$true' in payload or '$False' in payload or '$false' in payload:
         payload = bool_edit(payload)
     payload = rename(payload)
+    payload = cmd_sub(payload)
     payload = random.choice([quote_interrupt(payload), gcm(payload)])
     payload = commentropy(payload)
     payload = encode_string(payload)
@@ -73,6 +75,9 @@ if __name__ == "__main__":
 
         elif re.match("[cC][oO][mM][mM][eE][nN][tT]", args.mode):
             print(commentropy(p))
+
+        elif re.match("[sS][uU][bB]", args.mode):
+            print(cmd_sub(p))
 
         elif re.match("[eE][nN][tT][rR][oO][pP][yY]", args.mode):
             print(entropy_calc(p))
