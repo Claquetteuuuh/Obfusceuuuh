@@ -79,4 +79,4 @@ def interrupt(payload: str):
     return fnl
 
 if __name__ == "__main__":
-    print(interrupt("mange tes.grand.mort[stp]; $cailloux = Test.dd; "))
+    pass
