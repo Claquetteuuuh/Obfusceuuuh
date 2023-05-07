@@ -24,6 +24,7 @@ def obfuscation(payload: str):
         payload = bool_edit(payload)
     payload = rename(payload)
     payload = cmd_sub(payload)
+    # bug hoaxshell
     payload = random.choice([quote_interrupt(payload), gcm(payload)])
     payload = commentropy(payload)
     payload = randomize_case(payload)
@@ -48,14 +49,24 @@ if __name__ == "__main__":
         type=str,
         help="Enter the mode, Default=ALL"
     )
+    parser.add_argument(
+        "-p"
+        "--payload",
+        type=str,
+        help="Enter your payload string"
+    )
     args = parser.parse_args()
-    if args.file_name == None:
-        print("File not specified. Use -f <FILE_NAME>")
+    if args.file_name == None and args.payload == None:
+        print("Any payload specified. Use -f <FILE_NAME> or -p <PAYLOAD>")
     else:
-        p = get_file_content(args.file_name)
+        p = ""
+        if args.file_name != None:
+            p = get_file_content(args.file_name)
+        else:
+            p = args.payload
+       
         if args.mode == None:
             obfuscation(p)
-
         elif re.match("[vV][aA][rR]", args.mode):
             payload = rename(p)
             print(payload)
