@@ -25,7 +25,8 @@ def obfuscation(payload: str):
     payload = rename(payload)
     payload = cmd_sub(payload)
     # bug hoaxshell
-    payload = random.choice([quote_interrupt(payload), gcm(payload)])
+    payload = quote_interrupt(payload)
+    # payload = random.choice([quote_interrupt(payload), gcm(payload)])
     payload = commentropy(payload)
     payload = randomize_case(payload)
     payload = encode_string(payload)
