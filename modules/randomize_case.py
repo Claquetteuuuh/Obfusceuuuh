@@ -3,7 +3,7 @@ import re
 
 def randomize_case(payload: str):
     stop = False
-    separator = [" ", ";", "'", '"', "`", "=", ","]
+    separator = [" ", ";", "`", "=", ","]
     new_p = ""
     stop_quote = False
     stop_quote_2 = False
@@ -23,7 +23,7 @@ def randomize_case(payload: str):
             else:
                 stop_quote_2 = True
 
-        if re.match("[a-zA-Z]", payload[i]) and stop == False and stop_quote == True and stop_quote_2 == True:
+        if re.match("[a-zA-Z]", payload[i]) and stop == False and stop_quote == False and stop_quote_2 == False:
             new_p += random.choice([payload[i].lower(), payload[i].upper()])
         else:
             new_p += payload[i]
