@@ -1,4 +1,4 @@
-# auto_powershell_obfuscation - Beta
+# ObfusceuuuH - Beta
 
 ## Description
 
